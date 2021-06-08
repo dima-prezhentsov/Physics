@@ -72,7 +72,8 @@ class Point:
 class Rocket:
     def __init__(self, angle, rocketM, fuelM, gasSpeed, burningV, image, width, height):
         self.angle = angle
-        self.rocketM = rocketM
+        self.variableAngle = angle
+        self.rocketM = rocketM + fuelM
         self.fuelM = fuelM
         self.gasSpeed = gasSpeed
         self.burningV = burningV
@@ -93,7 +94,7 @@ class Rocket:
         self.velocityY -= g / FPS
 
     def changeAngel(self):
-        self.angle = math.atan2(self.velocityY, self.velocityX) * 180 / math.pi
+        self.variableAngle = math.atan2(self.velocityY, self.velocityX) * 180 / math.pi
 
     def changeVelocity(self):
         global FPS
@@ -108,7 +109,7 @@ class Rocket:
         self.y += self.velocityY / FPS
 
     def blit(self, scr):
-        rotate_img = pg.transform.rotate(self.image, -90 + self.angle)
+        rotate_img = pg.transform.rotate(self.image, -90 + self.variableAngle)
         rect = self.image.get_rect(topleft=(int(self.x // scale), int(HEIGHT - (self.y // scale))))
         scr.blit(rotate_img, rect)
 
