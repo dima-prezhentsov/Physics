@@ -15,7 +15,12 @@ def main():
     h = 0
     frequency = 100000
     config = [0.0001, 500, 200, 2000000, 1, 300]
-
+    inp = open("config.txt", "r")
+    tmp = inp.readline()
+    if tmp != "":
+        for i in range(6):
+            config[i] = float(tmp)
+            tmp = inp.readline()
     u = config[0]
     r2 = config[1]
     h = config[2]
@@ -63,8 +68,8 @@ def main():
 
     point_width = 0.5
     pylab.subplot(2, 2, 1)
-    # pylab.xlim(0, max(max(y_x[0]), max(y_x[1])))
-    # pylab.ylim(r1, r2)
+    pylab.xlim(0, max(max(y_x[0]), max(y_x[1])))
+    pylab.ylim(r1, r2)
     pylab.scatter(y_x[1], y_x[0], s=point_width)
     pylab.title('y(x)')
 
@@ -79,8 +84,6 @@ def main():
     pylab.subplot(2, 2, 4)
     pylab.scatter(v_t[1], v_t[0], s=point_width)
     pylab.title("v(t)")
-
-
 
     pylab.show()
 
